@@ -89,6 +89,11 @@ define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
+if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+	$http_protocol = ( ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ) || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) ) ? 'https://' : 'http://';
+	define( 'WP_HOME', $http_protocol . $_SERVER['HTTP_HOST'] );
+	define( 'WP_SITEURL', $http_protocol . $_SERVER['HTTP_HOST'] );
+}
 
 
 /* That's all, stop editing! Happy publishing. */
